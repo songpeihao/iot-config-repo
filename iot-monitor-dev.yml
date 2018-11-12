@@ -1,0 +1,39 @@
+server:
+  port: 8103
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 10
+    healthCheckUrlPath: /actuator/health
+    metadata-map:
+      user.name: yzm-iot
+      user.password: 123456
+
+spring:
+  security:
+    user:
+      name: yzm-iot
+      password: 123456
+  boot:
+    admin:
+      client:
+        instance:
+          prefer-ip: true # 使用IP注册
+  rabbitmq:
+    host: 192.168.10.244
+    port: 5672
+    username: yzm-iot
+    password: 123456
+
+management:
+#  security:
+#    enabled: false
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+#      base-path: /
+      exposure:
+        include: "*"  # 由于SpringBoot限制，大多数端点不会通过HTTP开放，所以这里选择全部

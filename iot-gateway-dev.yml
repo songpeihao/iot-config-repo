@@ -1,0 +1,61 @@
+server:
+  port: 8100
+
+eureka:
+  instance:
+    hostname: iot-gateway
+    prefer-ip-address: false
+    statusPageUrlPath: /actuator/info
+    healthCheckUrlPath: /actuator/health
+    home-page-url-path: /
+  client:
+    service-url:
+      defaultZone: http://localhost:8101/eureka/
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+spring:
+  redis:
+    database: 2
+    host: 192.168.10.243
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 20
+  rabbitmq:
+    host: 192.168.10.244
+    port: 5672
+    username: yzm-iot
+    password: 123456
+  sleuth:
+    enabled: true
+    http:
+      legacy:
+        enabled: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+      - id: ace-auth
+        uri: lb://ace-auth
+        predicates:
+        - Path=/api/auth/**
+        filters:
+        - StripPrefix=2
+
+
