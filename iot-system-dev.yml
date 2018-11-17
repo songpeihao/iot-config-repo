@@ -1,0 +1,58 @@
+server:
+  port: 8211
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  datasource:
+    name: iot_sys
+    url: jdbc:mysql://106.12.121.153:3306/iot_sys?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMutiQueries=true
+    username: yzm-iot
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      filters: stat
+      max-active: 20
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select '1'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+  rabbitmq:
+    host: 106.12.121.153
+    port: 5672
+    username: yzm-iot
+    password: 123456
+  zipkin:
+    base-url: http://localhost:9411
+
+mybatis:
+  basepackage: com.yzm.iot.system.mapper
+  xmlLocation: classpath:mapper/**/*.xml
+  mapper-locations: "classpath*:mapper/*.xml"
+
+swagger:
+  enabled: true
+  base-package: com.yzm.iot.system
+  title: iot-system
+  version: 1.0.0.SNAPSHOT
+  description: 系统管理功能
+  contact:
+    name: admin
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # 由于SpringBoot限制，大多数端点不会通过HTTP开放，所以这里选择全部

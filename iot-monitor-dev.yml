@@ -4,8 +4,6 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
-    leaseRenewalIntervalInSeconds: 10
-    healthCheckUrlPath: /actuator/health
     metadata-map:
       user.name: yzm-iot
       user.password: 123456
