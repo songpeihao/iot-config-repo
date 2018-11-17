@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     name: iot_cus
-    url: jdbc:mysql://192.168.10.243:3306/iot_cus?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMutiQueries=true
+    url: jdbc:mysql://106.12.121.153:3306/iot_cus?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMutiQueries=true
     username: yzm-iot
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
